@@ -148,7 +148,7 @@ button:disabled { cursor: default; }
 
 .side h2 { margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--muted); }
 .grp { margin: 18px 0 8px; font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--muted); display: flex; align-items: center; gap: 10px; }
-.grp:first-child { margin-top: 0; }
+.picker > .grp:first-of-type { margin-top: 0; }
 .grp::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 12px; }
 .fr {
@@ -196,6 +196,35 @@ button:disabled { cursor: default; }
 .print #viewBg { filter: blur(6px); transform: scale(1.12); }
 .print #view { transform-origin: 50% 50%; }
 .safebox { position: absolute; top: 4.5%; bottom: 4.5%; left: 3.04%; right: 3.04%; border: 1.5px solid var(--coral); box-shadow: 0 0 0 999px rgba(196, 102, 79, .30); pointer-events: none; }
+.nowrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.nowname { margin: 0; min-width: 0; font-size: 14px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tool.fav { flex: 0 0 auto; white-space: nowrap; }
+.tool.fav svg { width: 15px; height: 15px; margin-right: 5px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+.tool.fav[aria-pressed="true"] { color: #A8752A; border-color: #E9B65A; background: #FFF6DE; }
+.tool.fav[aria-pressed="true"] svg { fill: #F6C552; stroke: #C98A2E; }
+.ptabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 12px; border-bottom: 1.5px solid var(--line); }
+.ptabs button { height: 46px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1.5px; background: none; color: var(--muted); font-size: 15px; font-weight: 700; }
+.ptabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--green); }
+.pane { padding-top: 14px; }
+.pane .specrow, .pane .slotbar { margin-top: 0; }
+.nowgrp { font-weight: 400; color: var(--muted); }
+.fnav svg { width: 13px; height: 13px; margin-right: 4px; vertical-align: -1px; fill: currentColor; }
+.fr { position: relative; }
+.fr.isfav::after { content: ""; position: absolute; top: 6px; right: 6px; width: 18px; height: 18px; border-radius: 50%; background: #FFF6DE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z' fill='%23F6C552' stroke='%23C98A2E' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; box-shadow: 0 1px 3px rgba(0, 0, 0, .2); }
+.batchrow { margin-top: 14px; }
+.corners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; max-width: 340px; }
+.corners .tool { width: 100%; }
+.deco input[type="text"] { width: 100%; height: 42px; padding: 0 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #FFFFFF; color: var(--ink); font: inherit; font-size: 15px; }
+.fnav { display: flex; gap: 6px; overflow-x: auto; padding: 0 28px 10px 0; margin-bottom: 4px; scrollbar-width: thin; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+.fnav button { flex: 0 0 auto; height: 34px; padding: 0 12px; border-radius: 17px; border: 1.5px solid var(--line); background: transparent; color: var(--muted); font-size: 13px; font-weight: 500; white-space: nowrap; }
+.fnav button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #FFFFFF; }
+.fempty { margin: 8px 0 16px; font-size: 13.5px; color: var(--muted); }
+.helpbtn { margin-left: 4px; padding: 0; border: 0; background: none; color: var(--green); font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.steps.big { font-size: 15px; gap: 8px; }
+.savebtns { display: grid; gap: 8px; }
+.bigsave { display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 12px; border: 0; background: var(--green); color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none; }
+.bigsave.alt { background: var(--card); color: var(--ink); border: 1.5px solid var(--line); font-size: 15px; }
+.bigsave[hidden] { display: none; }
 .sidehead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
 .sidehead h2 { margin: 0; }
 .tray { flex-basis: 100%; display: grid; gap: 8px; padding: 12px; border-radius: 12px; background: var(--tint); }
@@ -204,9 +233,7 @@ button:disabled { cursor: default; }
 .trayitems { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
 .trayitems button { flex: 0 0 auto; width: 76px; height: 56px; padding: 0; border: 2px solid #FFFFFF; border-radius: 6px; background: #FFFFFF center / cover no-repeat; }
 .trayitems button:focus-visible { outline: 2.5px solid var(--coral); }
-.deco { flex-basis: 100%; padding: 10px 14px 12px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--card); }
-.deco summary { cursor: pointer; font-size: 14px; font-weight: 700; color: var(--ink); padding: 4px 0; }
-.deco[open] summary { margin-bottom: 10px; }
+.deco { padding: 0; }
 .deco .erow + .erow, .deco .stickers + .decoedit, .deco .erow + .stickers { margin-top: 10px; }
 .deco textarea { width: 100%; flex: 1 1 180px; min-width: 0; min-height: 44px; padding: 8px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #FFFFFF; color: var(--ink); font: inherit; font-size: 15px; line-height: 1.4; resize: vertical; }
 .deco { min-width: 0; max-width: 100%; }
@@ -299,24 +326,21 @@ button:disabled { cursor: default; }
     <h1>쉼표 여행<svg viewBox="1 1 10 13.2" aria-hidden="true"><path d="M6 1.5c2.5 0 4.5 2 4.5 4.6 0 3.6-2.6 6.6-6.3 7.6l-.5-1.3c1.6-.6 2.7-1.7 3-3-.2 0-.5.1-.8.1-2.3 0-4.1-1.8-4.1-4 0-2.3 1.9-4 4.2-4z"></path></svg><span class="lite">사진 프레임</span></h1>
     <p class="tag">STOP · REST · RETURN</p>
     </div>
-    <p class="lead">프레임을 고르고 사진을 넣으세요. 셀피로 바로 뽑을 PNG 한 장으로 합쳐 드립니다.</p>
+    <p class="lead">프레임을 고르고 사진을 넣으세요. 셀피로 바로 뽑을 PNG 한 장으로 합쳐 드립니다. <button type="button" class="helpbtn" id="btnHelp">사용법</button></p>
   </header>
 
   <section class="stage" aria-label="사진">
     <div class="print" id="print"><canvas id="viewBg" width="64" height="43" aria-hidden="true" hidden></canvas><canvas id="view" width="1200" height="800"></canvas><div class="safebox" id="safeBox" hidden></div></div>
-    <div class="specrow">
-      <button type="button" class="tool small" id="btnSafe" aria-pressed="false">인쇄 안전선</button>
-      <p class="spec" id="spec">엽서 용지 RP-108 · 100 × 148 mm · 4컷</p>
+    <div class="nowrow">
+      <p class="nowname" id="nowName"></p>
+      <button type="button" class="tool small fav" id="btnFav" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>즐겨찾기</button>
     </div>
-    <p class="safehint" id="safeHint" hidden>붉은 띠는 셀피에서 테두리 없이 인쇄할 때 잘릴 수 있는 가장자리입니다.</p>
-    <div class="erow comprow" role="group" aria-labelledby="compLabel">
-      <span class="elabel" id="compLabel">인쇄 보정</span>
-      <button type="button" class="tool small" data-comp="0" aria-pressed="false">끔</button>
-      <button type="button" class="tool small" data-comp="3" aria-pressed="false">약하게</button>
-      <button type="button" class="tool small" data-comp="4.5" aria-pressed="true">보통</button>
-      <button type="button" class="tool small" data-comp="6" aria-pressed="false">강하게</button>
+    <div class="ptabs" role="tablist" aria-label="편집">
+      <button type="button" role="tab" id="tabPhoto" aria-controls="panePhoto" aria-selected="true">사진</button>
+      <button type="button" role="tab" id="tabDeco" aria-controls="paneDeco" aria-selected="false" tabindex="-1">꾸미기</button>
+      <button type="button" role="tab" id="tabPrint" aria-controls="panePrint" aria-selected="false" tabindex="-1">인쇄</button>
     </div>
-    <p class="comphint" id="compHint"></p>
+    <div class="pane" id="panePhoto" role="tabpanel" aria-labelledby="tabPhoto">
     <div class="slotbar">
       <div class="tray" id="tray" hidden>
         <div class="trayhead"><span>휴대폰에서 받은 사진</span><span class="traynote">눌러서 고른 칸에 넣습니다.</span></div>
@@ -342,8 +366,62 @@ button:disabled { cursor: default; }
         <button type="button" class="tool quiet" id="btnClear" disabled>모두 빼기</button>
       </div>
       <p class="hint" id="hint"></p>
-      <details class="deco" id="decoBox">
-        <summary>글자·스티커 꾸미기</summary>
+      <div class="edit" id="edit" hidden>
+        <div class="erow">
+          <label class="range" for="zoom"><span>확대</span><input type="range" id="zoom" min="30" max="300" step="1" value="100"><output id="zoomOut" for="zoom">100%</output></label>
+          <label class="range" for="tilt"><span>기울기</span><input type="range" id="tilt" min="-150" max="150" step="1" value="0"><output id="tiltOut" for="tilt">0.0°</output></label>
+        </div>
+        <div class="erow">
+          <button type="button" class="tool" id="btnRotL">왼쪽으로 돌리기</button>
+          <button type="button" class="tool" id="btnRotR">오른쪽으로 돌리기</button>
+          <button type="button" class="tool" id="btnFlip" aria-pressed="false">좌우 뒤집기</button>
+          <button type="button" class="tool" id="btnWhole" aria-pressed="false">사진 전체 보기</button>
+        </div>
+        <div class="erow" role="group" aria-labelledby="fillLabel">
+          <span id="fillLabel" class="elabel">빈 곳 채우기</span>
+          <button type="button" class="tool" data-fill="blur" aria-pressed="true">흐린 사진</button>
+          <button type="button" class="tool" data-fill="white" aria-pressed="false">흰색</button>
+          <button type="button" class="tool" data-fill="black" aria-pressed="false">검정</button>
+        </div>
+        <div class="erow nudge" role="group" aria-labelledby="nudgeLabel">
+          <span id="nudgeLabel" class="elabel">조금씩 옮기기</span>
+          <button type="button" class="tool sq" data-nudge="-1,0" aria-label="왼쪽으로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button>
+          <button type="button" class="tool sq" data-nudge="0,-1" aria-label="위로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg></button>
+          <button type="button" class="tool sq" data-nudge="0,1" aria-label="아래로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></button>
+          <button type="button" class="tool sq" data-nudge="1,0" aria-label="오른쪽으로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
+          <button type="button" class="tool" id="btnCenter">가운데로</button>
+        </div>
+        <details class="color" id="colorBox">
+          <summary>색 보정</summary>
+          <div class="erow">
+            <label class="range" for="adjB"><span>밝기</span><input type="range" id="adjB" data-adj="b" min="-100" max="100" step="1" value="0"><output id="adjBOut">0</output></label>
+            <label class="range" for="adjC"><span>대비</span><input type="range" id="adjC" data-adj="c" min="-100" max="100" step="1" value="0"><output id="adjCOut">0</output></label>
+            <label class="range" for="adjS"><span>채도</span><input type="range" id="adjS" data-adj="s" min="-100" max="100" step="1" value="0"><output id="adjSOut">0</output></label>
+            <label class="range" for="adjT"><span>색온도</span><input type="range" id="adjT" data-adj="t" min="-100" max="100" step="1" value="0"><output id="adjTOut">0</output></label>
+          </div>
+          <div class="erow"><button type="button" class="tool" id="btnMono" aria-pressed="false">흑백</button></div>
+        </details>
+        <div class="erow foot">
+          <p class="keys">컴퓨터에서는 화살표 키로도 옮길 수 있습니다. Shift를 같이 누르면 크게 움직입니다.</p>
+          <button type="button" class="tool quiet" id="btnResetPhoto">이 사진 처음대로</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="pane" id="paneDeco" role="tabpanel" aria-labelledby="tabDeco" hidden>
+      <div class="deco" id="decoBox">
+        <div class="dsec">
+          <h3 class="dh">모든 사진에 조 이름 넣기</h3>
+          <div class="erow">
+            <input type="text" id="teamInput" maxlength="20" placeholder="예: 3조" aria-label="조 이름" autocomplete="off">
+          </div>
+          <div class="corners" role="group" aria-label="조 이름 자리">
+            <button type="button" class="tool small" data-corner="tl">왼쪽 위</button>
+            <button type="button" class="tool small" data-corner="tr">오른쪽 위</button>
+            <button type="button" class="tool small" data-corner="bl">왼쪽 아래</button>
+            <button type="button" class="tool small" data-corner="br" aria-pressed="true">오른쪽 아래</button>
+          </div>
+        </div>
         <div class="dsec">
           <h3 class="dh">글자</h3>
           <div class="erow">
@@ -408,46 +486,24 @@ button:disabled { cursor: default; }
           </div>
         </div>
         <div class="erow dfoot"><button type="button" class="tool quiet" id="btnDecoClear">글자·스티커 모두 지우기</button></div>
-      </details>
-      <div class="edit" id="edit" hidden>
-        <div class="erow">
-          <label class="range" for="zoom"><span>확대</span><input type="range" id="zoom" min="30" max="300" step="1" value="100"><output id="zoomOut" for="zoom">100%</output></label>
-          <label class="range" for="tilt"><span>기울기</span><input type="range" id="tilt" min="-150" max="150" step="1" value="0"><output id="tiltOut" for="tilt">0.0°</output></label>
-        </div>
-        <div class="erow">
-          <button type="button" class="tool" id="btnRotL">왼쪽으로 돌리기</button>
-          <button type="button" class="tool" id="btnRotR">오른쪽으로 돌리기</button>
-          <button type="button" class="tool" id="btnFlip" aria-pressed="false">좌우 뒤집기</button>
-          <button type="button" class="tool" id="btnWhole" aria-pressed="false">사진 전체 보기</button>
-        </div>
-        <div class="erow" role="group" aria-labelledby="fillLabel">
-          <span id="fillLabel" class="elabel">빈 곳 채우기</span>
-          <button type="button" class="tool" data-fill="blur" aria-pressed="true">흐린 사진</button>
-          <button type="button" class="tool" data-fill="white" aria-pressed="false">흰색</button>
-          <button type="button" class="tool" data-fill="black" aria-pressed="false">검정</button>
-        </div>
-        <div class="erow nudge" role="group" aria-labelledby="nudgeLabel">
-          <span id="nudgeLabel" class="elabel">조금씩 옮기기</span>
-          <button type="button" class="tool sq" data-nudge="-1,0" aria-label="왼쪽으로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button>
-          <button type="button" class="tool sq" data-nudge="0,-1" aria-label="위로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 10l5-5 5 5"/></svg></button>
-          <button type="button" class="tool sq" data-nudge="0,1" aria-label="아래로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></button>
-          <button type="button" class="tool sq" data-nudge="1,0" aria-label="오른쪽으로"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
-          <button type="button" class="tool" id="btnCenter">가운데로</button>
-        </div>
-        <details class="color" id="colorBox">
-          <summary>색 보정</summary>
-          <div class="erow">
-            <label class="range" for="adjB"><span>밝기</span><input type="range" id="adjB" data-adj="b" min="-100" max="100" step="1" value="0"><output id="adjBOut">0</output></label>
-            <label class="range" for="adjC"><span>대비</span><input type="range" id="adjC" data-adj="c" min="-100" max="100" step="1" value="0"><output id="adjCOut">0</output></label>
-            <label class="range" for="adjS"><span>채도</span><input type="range" id="adjS" data-adj="s" min="-100" max="100" step="1" value="0"><output id="adjSOut">0</output></label>
-            <label class="range" for="adjT"><span>색온도</span><input type="range" id="adjT" data-adj="t" min="-100" max="100" step="1" value="0"><output id="adjTOut">0</output></label>
-          </div>
-          <div class="erow"><button type="button" class="tool" id="btnMono" aria-pressed="false">흑백</button></div>
-        </details>
-        <div class="erow foot">
-          <p class="keys">컴퓨터에서는 화살표 키로도 옮길 수 있습니다. Shift를 같이 누르면 크게 움직입니다.</p>
-          <button type="button" class="tool quiet" id="btnResetPhoto">이 사진 처음대로</button>
-        </div>
+      </div>
+    </div>
+    <div class="pane" id="panePrint" role="tabpanel" aria-labelledby="tabPrint" hidden>
+    <div class="specrow">
+      <button type="button" class="tool small" id="btnSafe" aria-pressed="false">인쇄 안전선</button>
+      <p class="spec" id="spec">엽서 용지 RP-108 · 100 × 148 mm · 4컷</p>
+    </div>
+    <p class="safehint" id="safeHint" hidden>붉은 띠는 셀피에서 테두리 없이 인쇄할 때 잘릴 수 있는 가장자리입니다.</p>
+    <div class="erow comprow" role="group" aria-labelledby="compLabel">
+      <span class="elabel" id="compLabel">인쇄 보정</span>
+      <button type="button" class="tool small" data-comp="0" aria-pressed="true">끔</button>
+      <button type="button" class="tool small" data-comp="3" aria-pressed="false">약하게</button>
+      <button type="button" class="tool small" data-comp="4.5" aria-pressed="false">보통</button>
+      <button type="button" class="tool small" data-comp="6" aria-pressed="false">강하게</button>
+    </div>
+    <p class="comphint" id="compHint"></p>
+      <div class="erow batchrow">
+        <button type="button" class="tool" id="btnBatch">여러 프레임 한꺼번에 저장</button>
       </div>
     </div>
   </section>
@@ -455,8 +511,9 @@ button:disabled { cursor: default; }
   <section class="side" aria-label="프레임">
     <div class="sidehead">
       <h2>프레임</h2>
-      <button type="button" class="tool small" id="btnBatch">여러 프레임 한꺼번에 저장</button>
     </div>
+    <div class="fnav" id="fnav" role="group" aria-label="프레임 묶음"></div>
+    <p class="fempty" id="fEmpty" hidden></p>
     <div class="picker" id="picker"></div>
     <div class="actionbar">
       <p class="status" id="status" role="status"><span id="statusText"></span><button type="button" id="statusAct" hidden></button></p>
@@ -470,6 +527,20 @@ button:disabled { cursor: default; }
 
 <input class="vh" type="file" id="fileOne" accept="image/*" tabindex="-1" aria-hidden="true">
 <input class="vh" type="file" id="fileMany" accept="image/*" multiple tabindex="-1" aria-hidden="true">
+
+<div class="result" id="introDialog" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <h2 id="introTitle">이렇게 쓰세요</h2>
+    <ol class="steps big">
+      <li>프레임 목록에서 마음에 드는 프레임을 고릅니다.</li>
+      <li>사진 고르기를 눌러 사진을 넣고, 사진을 끌어서 자리와 크기를 맞춥니다.</li>
+      <li>꾸미기에서 글자와 스티커를 붙입니다.</li>
+      <li>PNG 저장을 누르고, 저장한 사진을 셀피 앱에서 엽서 크기로 인쇄합니다.</li>
+    </ol>
+    <p>사진은 내 기기 안에서만 만들어지고, 다른 사람에게 보이지 않습니다.</p>
+    <div class="row"><button type="button" class="primary" id="introGo">시작하기</button></div>
+  </div>
+</div>
 
 <div class="result" id="qrDialog" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
@@ -510,12 +581,15 @@ button:disabled { cursor: default; }
 <div class="result" id="result" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
     <h2 id="resultTitle">완성한 사진</h2>
+    <div class="savebtns">
+      <button type="button" class="bigsave" id="resultShare" hidden>사진 앱에 저장·공유</button>
+      <a class="bigsave alt" id="resultDl" href="#" download>파일로 내려받기</a>
+    </div>
+    <p id="resultHow">사진을 길게 눌러 저장하세요. 컴퓨터에서는 마우스 오른쪽 버튼으로 저장합니다.</p>
     <img id="resultImg" alt="프레임에 사진을 넣은 완성본">
     <div class="resultmore" id="resultMore"></div>
-    <p>사진을 길게 눌러 저장하세요. 컴퓨터에서는 마우스 오른쪽 버튼으로 저장합니다.</p>
     <div class="row">
       <button type="button" id="resultClose">닫기</button>
-      <button type="button" class="primary" id="resultShare" hidden>사진 앱에 저장·공유</button>
     </div>
   </div>
 </div>
@@ -2840,6 +2914,19 @@ var qrcode = function() {
     decoHint: '글자와 스티커는 끌어서 옮깁니다. 크기는 두 손가락이나 크기 막대로 바꿉니다.',
     needText: '넣을 글자를 먼저 적어 주세요.',
     restored: '지난번 작업을 불러왔습니다.',
+    favOn: '즐겨찾기에 넣었습니다.',
+    favOff: '즐겨찾기에서 뺐습니다.',
+    navAll: '전체',
+    navFav: '즐겨찾기',
+    navRecent: '최근',
+    favEmpty: '아직 즐겨찾기한 프레임이 없습니다. 사진 아래 즐겨찾기를 누르면 여기에 모입니다.',
+    recentEmpty: '아직 고른 프레임이 없습니다.',
+    shareOne: '사진 앱에 저장·공유',
+    shareMany: '사진 앱에 모두 저장·공유',
+    dlOne: '파일로 내려받기',
+    dlZip: '모두 ZIP 파일로 내려받기',
+    howShare: '사진 앱에 저장하려면 위 버튼을 누르세요. 사진을 길게 눌러도 저장됩니다.',
+    howPlain: '사진을 길게 눌러 저장하세요. 컴퓨터에서는 파일로 내려받기를 누르세요.',
     fresh: '새로 시작',
     noLan: '이 컴퓨터의 와이파이 주소를 찾지 못했습니다. 와이파이에 연결한 뒤 다시 눌러 주세요.',
     received: function (n) { return '휴대폰에서 사진 ' + n + '장을 받았습니다.'; },
@@ -2988,6 +3075,7 @@ var qrcode = function() {
     var fimg = img || (fi != null ? null : frameImg);
     if (fimg) ctx.drawImage(fimg, 0, 0, f.w * k, f.h * k);
     drawDeco(ctx, k, f, preview);
+    drawTeam(ctx, k, f);
     if (!preview) return;
 
     var u = f.w / cssW;                     /* drawing units per CSS pixel */
@@ -3116,14 +3204,15 @@ var qrcode = function() {
     if (text && ms) sayTimer = setTimeout(function () { say(''); }, ms);
   }
 
-  function select(i) { state.sel = i; if (i >= 0) state.dsel = -1; refresh(); draw(); }
+  function select(i) { state.sel = i; if (i >= 0) { state.dsel = -1; showPane('photo'); } refresh(); draw(); }
 
   function setFrame(i) {
     state.frame = i;
     var f = F();
     if (state.sel >= count()) state.sel = -1;
-    frameBtns.forEach(function (b, n) { b.setAttribute('aria-pressed', n === i ? 'true' : 'false'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.fr[data-fi]'), function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-fi') === i ? 'true' : 'false'); });
     try { localStorage.setItem('shimpyo-frame', f.key); } catch (e) {}
+    showNow();
     if (typeof persistSoon === 'function' && booted) persistSoon();
     printEl.style.aspectRatio = f.w + ' / ' + f.h;
     var im = new Image();
@@ -3535,6 +3624,7 @@ var qrcode = function() {
   /* ---------- finished print out ---------- */
   async function renderFinal() {
     await decoReady();
+    await teamReady();
     state.slots.forEach(function (p) { if (p && p.low) rebuild(p, false); });
     var f = F(), c = document.createElement('canvas');
     c.width = f.out[0];
@@ -3572,14 +3662,29 @@ var qrcode = function() {
   function canShare(files) { try { return !!(navigator.canShare && navigator.share && navigator.canShare({ files: files })); } catch (e) { return false; } }
   function offerShare(list) {
     shareFiles = list.map(function (x) { return new File([x.blob], x.name, { type: 'image/png' }); });
-    $('resultShare').hidden = !canShare(shareFiles);
+    var ok = canShare(shareFiles);
+    $('resultShare').hidden = !ok;
+    $('resultShare').textContent = list.length > 1 ? MSG.shareMany : MSG.shareOne;
+    $('resultHow').textContent = ok ? MSG.howShare : MSG.howPlain;
+    $('resultDl').classList.toggle('alt', ok);
+  }
+  var dlUrl = '';
+  function offerDownload(blob, name, many) {
+    if (dlUrl) URL.revokeObjectURL(dlUrl);
+    dlUrl = URL.createObjectURL(blob);
+    var a = $('resultDl');
+    a.href = dlUrl;
+    a.setAttribute('download', name);
+    a.textContent = many ? MSG.dlZip : MSG.dlOne;
   }
   $('resultShare').addEventListener('click', function () {
     if (!shareFiles.length) return;
     navigator.share({ files: shareFiles }).catch(function () {});
   });
   function showResult(blob, name) {
-    offerShare([{ blob: blob, name: name || fileName() }]);
+    name = name || fileName();
+    offerShare([{ blob: blob, name: name }]);
+    offerDownload(blob, name, false);
     if (resultUrl) URL.revokeObjectURL(resultUrl);
     resultUrl = URL.createObjectURL(blob);
     $('resultImg').src = resultUrl;
@@ -3591,6 +3696,7 @@ var qrcode = function() {
     $('resultImg').removeAttribute('src');
     $('resultMore').innerHTML = '';
     if (resultUrl) { URL.revokeObjectURL(resultUrl); resultUrl = ''; }
+    if (dlUrl) { URL.revokeObjectURL(dlUrl); dlUrl = ''; }
     $('btnSave').focus();
   }
   $('resultClose').addEventListener('click', closeResult);
@@ -3686,7 +3792,7 @@ var qrcode = function() {
   $('btnRedo').addEventListener('click', redo);
 
   /* ================================================================ print safety line */
-  var safeOn = false, compMM = 4.5;
+  var safeOn = false, compMM = 0;
   try { safeOn = localStorage.getItem('shimpyo-safe') === '1'; } catch (e) {}
   try { var cm = localStorage.getItem('shimpyo-comp'); if (cm !== null && !isNaN(+cm)) compMM = +cm; } catch (e) {}
   /* The print is shrunk evenly so that compMM millimetres are free at the top and bottom (the tighter side of a
@@ -4002,7 +4108,7 @@ var qrcode = function() {
   function selectDeco(i) {
     state.dsel = i;
     state.sel = -1;
-    $('decoBox').open = true;
+    showPane('deco');
     var it = state.deco[i];
     if (it && it.kind === 'text') $('decoEditText').value = it.text;
     colorTarget = 'fill';
@@ -4381,7 +4487,7 @@ var qrcode = function() {
         st.textContent = MSG.batchSaved;
       } else {
         $('batchDialog').hidden = true;
-        showMany(files);
+        showMany(files, await makeZip(files), name);
         say(MSG.batchShow, 12000);
       }
     } catch (err) {
@@ -4390,13 +4496,14 @@ var qrcode = function() {
     busy = false; batchCount(); refresh();
   });
   var moreUrls = [];
-  function showMany(files) {
+  function showMany(files, zip, zipName) {
     var box = $('resultMore');
     moreUrls.forEach(function (u) { URL.revokeObjectURL(u); }); moreUrls = [];
     box.innerHTML = '';
     files.slice(1).forEach(function (f) { var u = URL.createObjectURL(f.blob), im = document.createElement('img'); moreUrls.push(u); im.src = u; im.alt = f.name; box.appendChild(im); });
     showResult(files[0].blob, files[0].name);
     offerShare(files);
+    if (zip) offerDownload(zip, zipName, true);
   }
 
   /* ================================================================ photos from phones (the small program only) */
@@ -4497,23 +4604,79 @@ var qrcode = function() {
   }
 
   /* ---------- start ---------- */
-  var picker = $('picker'), grid = null, lastGroup = null;
-  FR.forEach(function (f, i) {
-    if (f.group !== lastGroup) {
-      var hd = document.createElement('h3');
-      hd.className = 'grp';
-      hd.textContent = f.group;
-      picker.appendChild(hd);
-      grid = document.createElement('div');
-      grid.className = 'frames';
-      picker.appendChild(grid);
-      lastGroup = f.group;
-    }
-    var b = document.createElement('button');
+  /* tabs under the print */
+  var TABS = ['photo', 'deco', 'print'], TAB_ID = { photo: 'Photo', deco: 'Deco', print: 'Print' }, paneNow = 'photo';
+  function showPane(t) {
+    if (TABS.indexOf(t) < 0 || t === paneNow && !$('pane' + TAB_ID[t]).hidden) return;
+    paneNow = t;
+    TABS.forEach(function (n) {
+      var on = n === t, b = $('tab' + TAB_ID[n]);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+      $('pane' + TAB_ID[n]).hidden = !on;
+    });
+  }
+  TABS.forEach(function (n, k) {
+    var b = $('tab' + TAB_ID[n]);
+    b.addEventListener('click', function () { showPane(n); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var m = TABS[(k + d + TABS.length) % TABS.length];
+      showPane(m);
+      $('tab' + TAB_ID[m]).focus();
+    });
+  });
+
+  /* favourites and recent frames */
+  function readList(key) { try { var v = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  function writeList(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+  var KEYS = {};
+  FR.forEach(function (f, i) { KEYS[f.key] = i; });
+  var favs = readList('shimpyo-fav').filter(function (k) { return k in KEYS; });
+  var recent = readList('shimpyo-recent').filter(function (k) { return k in KEYS; });
+  function isFav(key) { return favs.indexOf(key) >= 0; }
+  function showNow() {
+    var f = F(), el = $('nowName');
+    el.textContent = '';
+    var g = document.createElement('span');
+    g.className = 'nowgrp';
+    g.textContent = f.group + ' · ';
+    el.appendChild(g);
+    el.appendChild(document.createTextNode(f.name));
+    $('btnFav').setAttribute('aria-pressed', isFav(f.key) ? 'true' : 'false');
+  }
+  function markFavs() {
+    Array.prototype.forEach.call(document.querySelectorAll('.fr[data-fi]'), function (b) { b.classList.toggle('isfav', isFav(FR[+b.getAttribute('data-fi')].key)); });
+    var c = $('fnav').querySelector('[data-filter="fav"] .n');
+    if (c) c.textContent = favs.length ? ' ' + favs.length : '';
+  }
+  $('btnFav').addEventListener('click', function () {
+    var key = F().key, on = !isFav(key);
+    if (on) favs.unshift(key); else favs = favs.filter(function (k) { return k !== key; });
+    writeList('shimpyo-fav', favs);
+    showNow();
+    markFavs();
+    if (filterNow === 'fav') applyFilter();
+    say(on ? MSG.favOn : MSG.favOff, 4000);
+  });
+  function pushRecent(key) {
+    recent = [key].concat(recent.filter(function (k) { return k !== key; })).slice(0, 8);
+    writeList('shimpyo-recent', recent);
+    if (filterNow === 'recent') applyFilter();
+  }
+  function pickFrame(i) { setFrame(i); pushRecent(FR[i].key); }
+
+  /* the frame list */
+  var picker = $('picker'), grid = null, lastGroup = null, GROUPS = [], groupEls = {};
+  function frameButton(i, withId) {
+    var f = FR[i], b = document.createElement('button');
     b.type = 'button';
     b.className = 'fr';
-    b.id = 'frame-' + f.key;
-    b.setAttribute('aria-pressed', 'false');
+    if (withId) b.id = 'frame-' + f.key;
+    b.setAttribute('data-fi', i);
+    b.setAttribute('aria-pressed', i === state.frame ? 'true' : 'false');
     var im = document.createElement('img');
     im.src = f.thumb;
     im.alt = '';
@@ -4524,17 +4687,146 @@ var qrcode = function() {
     s.textContent = f.name;
     b.appendChild(im);
     b.appendChild(s);
-    b.addEventListener('click', function () { setFrame(i); });
+    b.addEventListener('click', function () { pickFrame(i); });
+    return b;
+  }
+  var listBox = document.createElement('div');
+  listBox.className = 'frames';
+  listBox.hidden = true;
+  picker.appendChild(listBox);
+  FR.forEach(function (f, i) {
+    if (f.group !== lastGroup) {
+      var hd = document.createElement('h3');
+      hd.className = 'grp';
+      hd.textContent = f.group;
+      picker.appendChild(hd);
+      grid = document.createElement('div');
+      grid.className = 'frames';
+      picker.appendChild(grid);
+      lastGroup = f.group;
+      GROUPS.push(f.group);
+      groupEls[f.group] = [hd, grid];
+    }
+    var b = frameButton(i, true);
     grid.appendChild(b);
     frameBtns.push(b);
   });
+  var filterNow = 'all';
+  try { filterNow = localStorage.getItem('shimpyo-filter') || 'all'; } catch (e) {}
+  if (['all', 'fav', 'recent'].indexOf(filterNow) < 0 && GROUPS.indexOf(filterNow) < 0) filterNow = 'all';
+  [['all', MSG.navAll], ['fav', MSG.navFav], ['recent', MSG.navRecent]].concat(GROUPS.map(function (g) { return [g, g]; })).forEach(function (q) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('data-filter', q[0]);
+    if (q[0] === 'fav') {
+      b.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>';
+      b.appendChild(document.createTextNode(q[1]));
+      var n = document.createElement('span');
+      n.className = 'n';
+      b.appendChild(n);
+    } else {
+      b.textContent = q[1];
+    }
+    b.addEventListener('click', function () {
+      filterNow = q[0];
+      try { localStorage.setItem('shimpyo-filter', filterNow); } catch (e) {}
+      applyFilter();
+      picker.scrollTop = 0;
+    });
+    $('fnav').appendChild(b);
+  });
+  function applyFilter() {
+    Array.prototype.forEach.call($('fnav').children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-filter') === filterNow ? 'true' : 'false'); });
+    var list = filterNow === 'fav' ? favs : filterNow === 'recent' ? recent : null;
+    listBox.innerHTML = '';
+    listBox.hidden = !list || !list.length;
+    if (list) list.forEach(function (k) { listBox.appendChild(frameButton(KEYS[k], false)); });
+    GROUPS.forEach(function (g) {
+      var on = !list && (filterNow === 'all' || filterNow === g);
+      groupEls[g][0].hidden = !on || filterNow === g;
+      groupEls[g][1].hidden = !on;
+    });
+    var empty = list && !list.length;
+    $('fEmpty').hidden = !empty;
+    $('fEmpty').textContent = empty ? (filterNow === 'fav' ? MSG.favEmpty : MSG.recentEmpty) : '';
+    markFavs();
+  }
+  applyFilter();
+
+  /* the group name on every print */
+  var team = { text: '', corner: 'br' };
+  try { var tm = JSON.parse(localStorage.getItem('shimpyo-team') || 'null'); if (tm && typeof tm.text === 'string') team = { text: tm.text.slice(0, 20), corner: /^(tl|tr|bl|br)$/.test(tm.corner) ? tm.corner : 'br' }; } catch (e) {}
+  var TEAM_FONT = "'Jua', " + BODY, teamWait = null;
+  function teamReady() {
+    var t = team.text.trim();
+    if (!t || !document.fonts || !document.fonts.load) return Promise.resolve();
+    return document.fonts.load('400 40px ' + TEAM_FONT, t).catch(function () {});
+  }
+  function saveTeam() {
+    try { localStorage.setItem('shimpyo-team', JSON.stringify(team)); } catch (e) {}
+    pressAll('[data-corner]', 'data-corner', team.corner);
+    clearTimeout(teamWait);
+    teamWait = setTimeout(function () { teamReady().then(draw); }, 120);
+    draw();
+  }
+  function drawTeam(ctx, k, f) {
+    var t = team.text.trim();
+    if (!t) return;
+    var H = f.h * .056, fs = H * .6, gap = H * .16, padX = H * .48;
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(k, k);
+    ctx.font = '400 ' + fs + 'px ' + TEAM_FONT;
+    var dot = H * .2, tw = ctx.measureText(t).width, W = padX * 2 + dot + gap * 2 + tw;
+    var mx = f.w * .03 + f.h * .03, my = f.h * .045 + f.h * .03;
+    var x = team.corner.charAt(1) === 'l' ? mx : f.w - mx - W, y = team.corner.charAt(0) === 't' ? my : f.h - my - H;
+    ctx.shadowColor = 'rgba(30, 40, 30, .22)';
+    ctx.shadowBlur = H * .25;
+    ctx.shadowOffsetY = H * .06;
+    ctx.fillStyle = 'rgba(255, 253, 247, .94)';
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, W, H, H / 2); else { ctx.moveTo(x + H / 2, y); ctx.arcTo(x + W, y, x + W, y + H, H / 2); ctx.arcTo(x + W, y + H, x, y + H, H / 2); ctx.arcTo(x, y + H, x, y, H / 2); ctx.arcTo(x, y, x + W, y, H / 2); ctx.closePath(); }
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = 'rgba(43, 67, 54, .35)';
+    ctx.lineWidth = H * .04;
+    ctx.stroke();
+    ctx.fillStyle = CORAL;                              /* a small dot before the name */
+    ctx.beginPath();
+    ctx.arc(x + padX + dot / 2, y + H / 2, dot / 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#2B4336';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(t, x + padX + dot + gap * 2, y + H * .54);
+    ctx.restore();
+  }
+  $('teamInput').value = team.text;
+  $('teamInput').addEventListener('input', function () { team.text = this.value.slice(0, 20); saveTeam(); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-corner]'), function (b) {
+    b.addEventListener('click', function () { team.corner = this.getAttribute('data-corner'); saveTeam(); });
+  });
+  pressAll('[data-corner]', 'data-corner', team.corner);
+  if (team.text.trim()) teamReady().then(draw);
+
+  /* first visit: how to use */
+  function openIntro() { $('introDialog').hidden = false; $('introGo').focus(); }
+  function closeIntro() {
+    $('introDialog').hidden = true;
+    try { localStorage.setItem('shimpyo-intro', '1'); } catch (e) {}
+  }
+  $('btnHelp').addEventListener('click', openIntro);
+  $('introGo').addEventListener('click', closeIntro);
+  $('introDialog').addEventListener('click', function (e) { if (e.target === this) closeIntro(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('introDialog').hidden) closeIntro(); });
+
   var start = 0;
   try {
     var saved = localStorage.getItem('shimpyo-frame');
     FR.forEach(function (f, i) { if (f.key === saved) start = i; });
   } catch (e) {}
   setFrame(start);
-  if (picker.scrollHeight > picker.clientHeight + 4) picker.scrollTop = Math.max(0, frameBtns[start].offsetTop - picker.offsetTop - 40);
+  if (filterNow === 'all' && picker.scrollHeight > picker.clientHeight + 4) picker.scrollTop = Math.max(0, frameBtns[start].offsetTop - picker.offsetTop - 40);
   restore().then(function (ok) {
     if (ok) {
       setFrame(state.frame);
@@ -4543,7 +4835,12 @@ var qrcode = function() {
       draw();
       say(MSG.restored, 12000, MSG.fresh, newStart);
     }
-  }).catch(function () {}).then(function () { booted = true; commit(); refresh(); });
+  }).catch(function () {}).then(function () {
+    booted = true; commit(); refresh();
+    var seen = null;
+    try { seen = localStorage.getItem('shimpyo-intro'); } catch (e) { seen = '1'; }
+    if (!seen && $('result').hidden && $('qrDialog').hidden) openIntro();
+  });
   if (window.ResizeObserver) new ResizeObserver(fit).observe(printEl); else window.addEventListener('resize', fit);
   fit();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
